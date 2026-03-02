@@ -1,0 +1,40 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg_grad" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#833AB4"/>
+      <stop offset="30%" stop-color="#E1306C"/>
+      <stop offset="60%" stop-color="#F77737"/>
+      <stop offset="100%" stop-color="#FFDC80"/>
+    </linearGradient>
+
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" rx="120" fill="url(#bg_grad)"/>
+
+  <g stroke="white" stroke-width="32" stroke-linecap="round" stroke-linejoin="round">
+     <path d="M150 210L200 320L230 250L265 325L310 215" />
+     <path d="M265 210H335C365 210 375 235 375 255C375 275 365 300 335 300H270" />
+     <path d="M270 300H335C365 300 385 325 385 355C385 385 365 410 335 410H270" />
+  </g>
+
+  <g filter="url(#glow)">
+    <circle cx="256" cy="180" r="14" fill="white">
+      <animate 
+        attributeName="r" 
+        values="12;16;12" 
+        dur="2s" 
+        repeatCount="indefinite" />
+    </circle>
+    <circle cx="256" cy="180" r="28" fill="white" fill-opacity="0.4">
+      <animate 
+        attributeName="fill-opacity" 
+        values="0.2;0.5;0.2" 
+        dur="2s" 
+        repeatCount="indefinite" />
+    </circle>
+  </g>
+</svg>

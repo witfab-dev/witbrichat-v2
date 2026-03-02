@@ -1,0 +1,243 @@
+/* --- 1. PANEL CONTAINER --- */
+.notifications-panel {
+  position: fixed;
+  top: 0;
+  left: -420px; /* Fully hidden off-screen */
+  width: 397px;
+  height: 100vh;
+  background: #ffffff;
+  border-right: 1px solid #dbdbdb;
+  z-index: 950;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 10px 0 30px rgba(0, 0, 0, 0.03);
+}
+
+.notifications-panel.open {
+  transform: translateX(492px); /* 72px (narrow nav) + 420px offset */
+}
+
+/* --- 2. HEADER SECTION --- */
+.notif-header {
+  padding: 24px 24px 12px 24px;
+  position: sticky;
+  top: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+
+.notif-header h2 {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 20px;
+}
+
+.notif-filters {
+  display: flex;
+  gap: 8px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #efefef;
+}
+
+.notif-filters button {
+  background: #efefef;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #262626;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.notif-filters button:hover {
+  background: #e2e2e2;
+}
+
+.notif-filters button.active {
+  background: #262626;
+  color: #ffffff;
+}
+
+/* --- 3. NOTIFICATION ITEMS --- */
+.notif-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0;
+}
+
+.notif-section-title {
+  padding: 16px 24px 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #262626;
+}
+
+.notif-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+  gap: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  position: relative;
+}
+
+.notif-item:hover {
+  background-color: #fafafa;
+}
+
+/* Unread Indicator Dot */
+.notif-item.unread::before {
+  content: "";
+  position: absolute;
+  right: 12px;
+  width: 8px;
+  height: 8px;
+  background-color: #0095f6;
+  border-radius: 50%;
+}
+
+/* --- 4. AVATARS & BADGES --- */
+.notif-avatar-container {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.notif-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  padding: 2px; /* Instagram-style story ring */
+}
+
+.notif-avatar-inner {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  overflow: hidden;
+  border: 2px solid #fff;
+}
+
+.notif-type-icon {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  background: #ffffff;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+/* --- 5. TEXT CONTENT --- */
+.notif-content {
+  flex: 1;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.notif-user {
+  font-weight: 700;
+  color: #262626;
+}
+
+.notif-text {
+  color: #262626;
+  margin: 0 4px;
+}
+
+.notif-timestamp {
+  color: #8e8e8e;
+  font-size: 13px;
+}
+
+/* --- 6. ACTION BUTTONS --- */
+.notif-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.notif-btn-primary {
+  background-color: #0095f6;
+  color: white;
+  border: none;
+  padding: 7px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.notif-btn-primary:hover {
+  background-color: #1877f2;
+}
+
+.notif-remove-btn {
+  background: none;
+  border: none;
+  color: #8e8e8e;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.notif-item:hover .notif-remove-btn {
+  opacity: 1;
+}
+
+.notif-remove-btn:hover {
+  color: #ed4956;
+}
+/* --- Header Row for Title and Cross --- */
+.notif-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* --- The Close Cross Icon --- */
+.panel-close-x {
+  display: block !important; /* Ensure it's not hidden */
+  font-size: 28px;
+  color: #262626;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+
+.panel-close-x:hover {
+  background-color: #f2f2f2;
+  color: #ed4956; /* Turns red on hover for a 'close' feel */
+}
+
+/* --- Individual Notification Remove Cross --- */
+.notif-remove-x {
+  font-size: 20px;
+  color: #8e8e8e;
+  cursor: pointer;
+  opacity: 0; /* Hidden until hover */
+  transition: opacity 0.2s;
+}
+
+.notif-item:hover .notif-remove-x {
+  opacity: 1; /* Shows up when you hover the notification */
+}

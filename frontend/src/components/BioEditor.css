@@ -1,0 +1,189 @@
+/* --- 1. CORE VARIABLES --- */
+:root {
+  --bio-primary: #0095f6;
+  --bio-primary-hover: #1877f2;
+  --bio-bg-soft: #fafafa;
+  --bio-border: #dbdbdb;
+  --bio-text: #262626;
+  --bio-text-alt: #8e8e8e;
+  --bio-success: #4ed839;
+  --bio-danger: #ed4956;
+  --bio-warning: #ffcc00;
+  --shadow-subtle: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* --- 2. CONTAINER & LAYOUT --- */
+.professional-bio-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  animation: bioFadeIn 0.4s ease-out;
+}
+
+.bio-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 24px;
+}
+
+.bio-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--bio-text);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.bio-success-tag {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--bio-success);
+  font-size: 13px;
+  font-weight: 700;
+  background: rgba(78, 216, 57, 0.1);
+  padding: 4px 10px;
+  border-radius: 20px;
+  animation: bioPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* --- 3. THE TEXTAREA INPUT --- */
+.bio-input-wrapper {
+  position: relative;
+  background: white;
+  border: 1px solid var(--bio-border);
+  border-radius: 12px;
+  transition: all 0.25s ease;
+  overflow: hidden; /* Clips the child textarea */
+}
+
+/* Focus Logic */
+.bio-input-wrapper:focus-within {
+  border-color: var(--bio-text-alt);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.03);
+  transform: translateY(-1px);
+}
+
+/* Warning State Logic */
+.bio-input-wrapper.bio-warning {
+  border-color: var(--bio-warning);
+  box-shadow: 0 0 0 2px rgba(255, 204, 0, 0.15);
+}
+
+.professional-textarea {
+  width: 100%;
+  min-height: 110px;
+  padding: 14px;
+  padding-bottom: 35px; /* Space for the counter */
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--bio-text);
+  resize: none;
+}
+
+.professional-textarea::placeholder {
+  color: #c7c7c7;
+  font-weight: 300;
+}
+
+/* --- 4. CHARACTER COUNTER --- */
+.bio-char-counter {
+  position: absolute;
+  bottom: 10px;
+  right: 14px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--bio-text-alt);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  pointer-events: none;
+  font-variant-numeric: tabular-nums; /* Critical: Stops text jitter */
+}
+
+.bio-char-counter.danger {
+  color: var(--bio-danger);
+  animation: shake 0.4s ease-in-out;
+}
+
+/* --- 5. HINT & BUTTON --- */
+.bio-help-text {
+  font-size: 12px;
+  color: var(--bio-text-alt);
+  margin-top: -4px;
+}
+
+.bio-save-btn {
+  background: var(--bio-primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  align-self: flex-start;
+  box-shadow: 0 2px 4px rgba(0, 149, 246, 0.15);
+}
+
+.bio-save-btn:hover:not(:disabled) {
+  background: var(--bio-primary-hover);
+  box-shadow: 0 4px 8px rgba(0, 149, 246, 0.25);
+}
+
+.bio-save-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(0.5);
+}
+
+.btn-loading {
+  background: #b2dffc !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* --- 6. ANIMATIONS --- */
+@keyframes bioFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bioPop {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}
+
+/* --- 7. RESPONSIVE DESIGN --- */
+@media (max-width: 768px) {
+  .professional-bio-container {
+    padding: 4px;
+  }
+  
+  .bio-save-btn {
+    width: 100%; /* Massive touch target for mobile thumbs */
+    padding: 14px;
+    font-size: 16px;
+    margin-top: 8px;
+  }
+
+  .professional-textarea {
+    font-size: 16px; /* Prevents iOS auto-zoom on focus */
+    min-height: 140px;
+  }
+}

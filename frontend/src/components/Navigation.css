@@ -1,0 +1,279 @@
+/* --- 1. CORE VARIABLES --- */
+:root {
+  --nav-width-desktop: 245px;
+  --nav-width-tablet: 73px;
+  --mobile-header-h: 60px;
+  --mobile-nav-h: 50px;
+  --border-style: 1px solid #dbdbdb;
+  --bg-color: #ffffff;
+  --hover-color: #f2f2f2;
+  --accent-blue: #0095f6;
+}
+
+/* --- 2. THE SIDEBAR (Desktop/Tablet) --- */
+.nav-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: var(--nav-width-desktop);
+  background: var(--bg-color);
+  border-right: var(--border-style);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 8px 12px 20px 12px;
+  transition: width 0.3s cubic-bezier(0.2, 0, 0, 1);
+  z-index: 1000;
+}
+
+/* Narrow state for Search, Notifs, or Messaging tab */
+.nav-sidebar.narrow {
+  width: var(--nav-width-tablet);
+}
+
+.sidebar-header-top {
+  padding: 25px 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  height: 70px;
+  overflow: hidden;
+}
+
+.witbri-logo-img {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+}
+
+.witbri-brand-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+  opacity: 1;
+}
+
+.nav-sidebar.narrow .witbri-brand-name {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* NAV LINKS & ITEMS */
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-grow: 1;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  position: relative;
+  color: #000;
+  text-decoration: none;
+}
+
+.nav-item:hover {
+  background: var(--hover-color);
+}
+
+.nav-item:active {
+  transform: scale(0.96);
+}
+
+.nav-item.active {
+  font-weight: 700;
+}
+
+/* Special styling for when a panel is open but it's not the "active" page */
+.nav-item.panel-active {
+  border: 1px solid #dbdbdb;
+  background: var(--hover-color);
+}
+
+.nav-icon {
+  font-size: 26px;
+  display: flex;
+  min-width: 26px;
+  justify-content: center;
+  position: relative;
+}
+
+.nav-label {
+  font-size: 16px;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+
+.nav-sidebar.narrow .nav-label {
+  opacity: 0;
+  display: none;
+}
+
+/* BADGES */
+.nav-badge-count {
+  position: absolute;
+  top: -5px;
+  right: -8px;
+  background: #ff3040;
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 1px 5px;
+  border-radius: 10px;
+  border: 2px solid white;
+}
+
+.nav-badge-dot {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 8px;
+  height: 8px;
+  background: var(--accent-blue);
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+/* TOOLTIPS (Visible only when narrow) */
+.nav-tooltip {
+  display: none;
+  position: absolute;
+  left: 80px;
+  background: #262626;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  white-space: nowrap;
+  z-index: 2000;
+}
+
+.nav-sidebar.narrow .nav-item:hover .nav-tooltip {
+  display: block;
+}
+
+/* --- 3. MOBILE HEADER --- */
+.mobile-header {
+  display: none;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: var(--mobile-header-h);
+  background: var(--bg-color);
+  border-bottom: var(--border-style);
+  padding: 0 16px;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1001;
+}
+
+/* --- 4. THE CONTENT AREA --- */
+.content-area {
+  margin-left: var(--nav-width-desktop);
+  transition: margin 0.3s ease;
+  min-height: 100vh;
+  background: #fff;
+  width: auto;
+}
+
+.nav-sidebar.narrow ~ .content-area {
+  margin-left: var(--nav-width-tablet);
+}
+
+/* --- 5. RESPONSIVE BREAKPOINTS --- */
+
+/* TABLET: Handle Auto-Narrow */
+@media (max-width: 1263px) {
+  .nav-sidebar {
+    width: var(--nav-width-tablet);
+  }
+  
+  .nav-label, .witbri-brand-name {
+    display: none !important;
+  }
+
+  .nav-item {
+    justify-content: center;
+    padding: 12px 0;
+  }
+
+  .content-area {
+    margin-left: var(--nav-width-tablet) !important;
+  }
+}
+
+/* MOBILE: Bottom Bar Transition */
+@media (max-width: 767px) {
+  .mobile-header {
+    display: flex;
+  }
+
+  .nav-sidebar {
+    width: 100% !important;
+    height: var(--mobile-nav-h);
+    top: auto;
+    bottom: 0;
+    flex-direction: row;
+    padding: 0;
+    border-right: none;
+    border-top: var(--border-style);
+  }
+
+  /* Hide Desktop specific elements */
+  .sidebar-header-top, 
+  .nav-bottom-section, 
+  .nav-label,
+  .nav-tooltip {
+    display: none !important;
+  }
+
+  .nav-top-section {
+    width: 100%;
+    display: flex;
+  }
+
+  .nav-links {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    gap: 0;
+  }
+
+  .nav-item {
+    flex: 1;
+    justify-content: center;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .nav-icon {
+    font-size: 28px;
+  }
+
+  .content-area {
+    margin-left: 0 !important; 
+    margin-top: var(--mobile-header-h);
+    margin-bottom: var(--mobile-nav-h);
+  }
+
+  /* Hide bottom nav ONLY when actively chatting on mobile */
+  .main-structure.chatting-active .nav-sidebar {
+    display: none;
+  }
+  
+  .main-structure.chatting-active .content-area {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+}

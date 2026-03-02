@@ -1,0 +1,220 @@
+/* --- 1. MODAL OVERLAY --- */
+.create-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  backdrop-filter: blur(2px);
+}
+
+/* --- 2. MODAL BOX & TRANSITIONS --- */
+.create-modal-box {
+  background: #fff;
+  border-radius: 12px;
+  width: 500px; /* Default Step 1 width */
+  max-width: 95vw;
+  height: 540px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: width 0.3s ease-in-out;
+}
+
+.create-modal-box.expanded {
+  width: 855px; /* Wider Step 2 width */
+}
+
+/* --- 3. HEADER --- */
+.create-modal-header {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.create-modal-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #262626;
+  flex: 1;
+  text-align: center;
+}
+
+.close-icon, .back-icon {
+  font-size: 28px;
+  cursor: pointer;
+  color: #262626;
+}
+
+.share-btn {
+  background: none;
+  border: none;
+  color: #0095f6;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.share-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* --- 4. STEP 1: UPLOAD CONTENT --- */
+.create-modal-content {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.upload-dropzone {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.primary-cta-btn {
+  background-color: #0095f6;
+  color: white;
+  padding: 7px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.primary-cta-btn:hover {
+  background-color: #1877f2;
+}
+
+/* --- 5. STEP 2: EDITOR LAYOUT --- */
+.post-editor-layout {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.preview-container {
+  flex: 1.4;
+  background-color: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #dbdbdb;
+}
+
+.preview-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- 6. CAPTION PANEL --- */
+.caption-side-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 15px;
+}
+
+.user-mini-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mini-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #efefef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  overflow: hidden;
+}
+
+.mini-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.editor-username {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.caption-side-panel textarea {
+  width: 100%;
+  height: 180px;
+  border: none;
+  resize: none;
+  font-family: inherit;
+  font-size: 16px;
+  outline: none;
+}
+
+/* --- 7. EDITOR FOOTER TOOLS --- */
+.editor-footer-tools {
+  margin-top: auto;
+}
+
+.tool-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  color: #8e8e8e;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.tool-item span {
+  font-size: 14px;
+  color: #262626;
+}
+
+.border-top {
+  border-top: 1px solid #dbdbdb;
+}
+
+.char-count {
+  font-size: 12px !important;
+  color: #c7c7c7 !important;
+}
+
+/* --- 8. RESPONSIVE --- */
+@media (max-width: 800px) {
+  .create-modal-box.expanded {
+    width: 95vw;
+    height: 80vh;
+  }
+  
+  .post-editor-layout {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  .preview-container {
+    flex: none;
+    height: 300px;
+    border-right: none;
+    border-bottom: 1px solid #dbdbdb;
+  }
+}

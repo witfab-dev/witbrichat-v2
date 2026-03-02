@@ -1,0 +1,293 @@
+/* 1. THE DARK OVERLAY */
+.detail-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000; /* Ensure it's above everything */
+  padding: 40px;
+}
+
+/* 2. THE MAIN MODAL BOX */
+.detail-container {
+  background: #fff;
+  display: flex;
+  width: 100%;
+  max-width: 1100px;
+  height: 90vh;
+  max-height: 800px;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 3. LEFT SIDE: THE IMAGE PANE */
+.detail-image-side {
+  flex: 1.3; /* Takes up more space */
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.detail-image-side img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Keeps original image proportions */
+}
+
+/* 4. RIGHT SIDE: THE INFO PANE */
+.detail-info-side {
+  flex: 0.7; /* Narrower sidebar */
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  min-width: 350px;
+}
+
+/* HEADER: USERNAME & ACTIONS */
+.detail-header {
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #efefef;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mini-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* BODY: CAPTION & COMMENTS */
+.detail-body {
+  flex: 1; /* Pushes footer to bottom */
+  padding: 16px;
+  overflow-y: auto;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.caption-section {
+  margin-bottom: 20px;
+}
+
+/* FOOTER: LIKES & BUTTONS */
+.detail-footer {
+  padding: 16px;
+  border-top: 1px solid #efefef;
+}
+
+.footer-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.left-actions {
+  display: flex;
+  gap: 16px;
+}
+
+.action-icon {
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.action-icon:hover {
+  opacity: 0.6;
+}
+
+.likes-count {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.post-timestamp {
+  font-size: 10px;
+  color: #8e8e8e;
+  text-transform: uppercase;
+}
+
+/* 5. UI BUTTONS */
+.delete-btn {
+  background: none;
+  border: none;
+  color: #8e8e8e;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.delete-btn:hover {
+  color: #ed4956; /* Danger Red */
+}
+
+.detail-close-x {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  z-index: 10001;
+}
+
+/* UTILS */
+.bold {
+  font-weight: 600;
+}
+
+/* RESPONSIVE BREAKPOINT: Tablet and Mobile */
+@media (max-width: 768px) {
+  .detail-overlay {
+    padding: 0; /* Full screen on mobile */
+  }
+
+  .detail-container {
+    flex-direction: column; /* Stacks image on top of info */
+    width: 100%;
+    height: 100vh;
+    max-height: none;
+    border-radius: 0;
+    overflow-y: auto; /* Allow the whole modal to scroll */
+  }
+
+  .detail-image-side {
+    flex: none;
+    width: 100%;
+    height: 400px; /* Fixed height for image area on mobile */
+  }
+
+  .detail-info-side {
+    flex: none;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .detail-body {
+    flex: none;
+    overflow-y: visible; /* Let the container handle scrolling */
+  }
+
+  .detail-close-x {
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.5); /* Circle background for visibility */
+    border-radius: 50%;
+    padding: 4px;
+  }
+}
+/* Add to PostDetail.css */
+
+.detail-image-side {
+  position: relative; /* Container must be relative for the absolute heart */
+  cursor: pointer;
+}
+
+.floating-heart-anim {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 80px;
+  color: rgba(255, 255, 255, 0.9);
+  z-index: 10;
+  pointer-events: none; /* Allows clicks to pass through to the image */
+  animation: heartPop 0.8s ease-out forwards;
+}
+
+@keyframes heartPop {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+  45% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+}
+
+.action-icon.liked {
+  color: #ed4956;
+  animation: iconBounce 0.3s ease;
+}
+
+@keyframes iconBounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+/* --- COMMENTS LIST --- */
+.comments-list {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.comment-item {
+  font-size: 14px;
+  line-height: 1.4;
+  word-wrap: break-word; /* Prevents long text from breaking the layout */
+}
+
+/* --- COMMENT INPUT AREA --- */
+.comment-input-wrapper {
+  display: flex;
+  align-items: center;
+  padding: 12px 0 0 0;
+  border-top: 1px solid #efefef;
+  margin-top: 12px;
+}
+
+.comment-input-wrapper input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  padding: 8px 0;
+  background: transparent;
+}
+
+.comment-input-wrapper button {
+  background: none;
+  border: none;
+  color: #0095f6;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0 8px;
+  transition: opacity 0.2s;
+}
+
+.comment-input-wrapper button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* --- SCROLLBAR STYLING --- */
+/* Custom thin scrollbar for a cleaner look in the detail body */
+.detail-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.detail-body::-webkit-scrollbar-thumb {
+  background: #dbdbdb;
+  border-radius: 10px;
+}
+
+/* --- LIKED STATE FOR HEART --- */
+.action-icon.liked {
+  color: #ed4956;
+}

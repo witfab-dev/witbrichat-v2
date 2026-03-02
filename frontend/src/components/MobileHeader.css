@@ -1,0 +1,87 @@
+/* --- MOBILE HEADER STYLES --- */
+.mobile-header {
+  display: none; /* Hidden on Desktop/Tablet by default */
+}
+
+@media (max-width: 767px) {
+  .mobile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #ffffff;
+    padding: 0 16px;
+    border-bottom: 1px solid #dbdbdb;
+    z-index: 1100; /* Higher than other elements to stay on top */
+    /* Optional: Subtle shadow for depth */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+
+  .mobile-logo-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+  }
+
+  .mobile-logo-img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+  }
+
+  .mobile-brand-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    font-family: 'Instagram Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    letter-spacing: -0.5px;
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .mobile-actions {
+    display: flex;
+    align-items: center;
+    gap: 18px; /* Space between icons */
+  }
+
+  .mobile-icon-btn {
+    background: none;
+    border: none;
+    padding: 4px;
+    margin: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #262626;
+    transition: transform 0.1s ease;
+  }
+
+  .mobile-icon-btn:active {
+    transform: scale(0.9); /* Subtle "click" effect */
+    color: #8e8e8e;
+  }
+
+  /* Specific styling for unread notification dots on mobile */
+  .mobile-icon-btn {
+    position: relative;
+  }
+
+  /* If you want a red dot for notifications in the header */
+  .mobile-icon-btn .notif-dot {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 8px;
+    height: 8px;
+    background-color: #ff3040;
+    border-radius: 50%;
+    border: 2px solid #fff;
+  }
+}

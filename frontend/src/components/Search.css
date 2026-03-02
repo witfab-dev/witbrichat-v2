@@ -1,0 +1,171 @@
+/* --- 1. SEARCH PANEL CONTAINER --- */
+.search-panel {
+  position: fixed;
+  top: 0;
+  /* Set to -420px to hide the 397px width + 1px border + shadow bleed */
+  left: -420px; 
+  width: 397px;
+  height: 100vh;
+  background-color: #ffffff;
+  border-right: 1px solid #dbdbdb;
+  z-index: 950;
+  /* Visibility prevents the "hidden" panel from capturing clicks */
+  visibility: hidden; 
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Open state: docks perfectly to the 72px narrow sidebar */
+.search-panel.open {
+  left: 72px;
+  visibility: visible;
+  box-shadow: 10px 0 30px rgba(0, 0, 0, 0.05);
+}
+
+/* --- 2. HEADER & INPUT AREA --- */
+.search-header {
+  padding: 25px 24px 20px 24px;
+}
+
+.search-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 35px;
+  color: #262626;
+  letter-spacing: -0.5px;
+}
+
+.search-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inner-search-icon {
+  position: absolute;
+  left: 14px;
+  font-size: 18px;
+  color: #8e8e8e;
+}
+
+.search-input-container input {
+  width: 100%;
+  height: 40px;
+  background-color: #efefef;
+  border: none;
+  border-radius: 8px;
+  padding: 0 40px;
+  font-size: 16px;
+  outline: none;
+  transition: background 0.2s;
+}
+
+.search-input-container input:focus {
+  background-color: #e2e2e2;
+}
+
+.clear-query-icon {
+  position: absolute;
+  right: 12px;
+  font-size: 18px;
+  color: #c7c7c7;
+  cursor: pointer;
+}
+
+/* --- 3. RESULTS AREA --- */
+.search-results-area {
+  flex: 1;
+  overflow-y: auto;
+  border-top: 1px solid #efefef;
+  margin-top: 10px;
+}
+
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px 10px 24px;
+}
+
+.results-header span {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.clear-all-link {
+  background: none;
+  border: none;
+  color: #0095f6;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.clear-all-link:hover {
+  color: #00376b;
+}
+
+/* --- 4. INDIVIDUAL ITEMS --- */
+.search-result-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 24px;
+  gap: 12px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.search-result-item:hover {
+  background-color: #fafafa;
+}
+
+.search-result-item img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #efefef;
+}
+
+.user-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.u-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #262626;
+}
+
+.f-name {
+  font-size: 14px;
+  color: #8e8e8e;
+}
+
+.no-results {
+  padding: 40px 24px;
+  text-align: center;
+  color: #8e8e8e;
+  font-size: 14px;
+}
+
+/* --- 5. BACKDROP (Prevents App Clicks) --- */
+.search-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: transparent; /* Or rgba(0,0,0,0.02) if you want a dim */
+  z-index: 900;
+}
+
+/* --- 6. MOBILE FIXES --- */
+@media (max-width: 768px) {
+  .search-panel {
+    width: 100%;
+    left: -100%; /* Hide completely left */
+  }
+  .search-panel.open {
+    left: 0;
+  }
+}
